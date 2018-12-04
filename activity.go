@@ -11,8 +11,8 @@ import (
 var log = logger.GetLogger("activity-dhtxx")
 
 const (
-	ivSensorType = "SensorType"
-	ivPin        = "PinNumber"
+
+	ivPinNumber  = "PinNumber"
 )
 
 // MyActivity is a stub for your Activity implementation
@@ -35,8 +35,7 @@ func (a *MyActivity) Eval(context activity.Context) (done bool, err error) {
 
 	//sensorType := context.GetInput(ivsensorType).(string)
 
-	SensorType := context.GetInput(ivSensorType)
-	PinNumber := context.GetInput(ivPin)
+	PinNumber := context.GetInput(ivPinNumber)
 	// do eval
 	temperature, humidity, retried, err :=
 		dht.ReadDHTxxWithRetry(dht.DHT11, PinNumber, true, 10)
