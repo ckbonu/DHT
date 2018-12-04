@@ -35,10 +35,10 @@ func (a *MyActivity) Eval(context activity.Context) (done bool, err error) {
 
 	//sensorType := context.GetInput(ivsensorType).(string)
 
-	//PinNumber := context.GetInput(ivPinNumber)
+	Pin := context.GetInput(ivPinNumber).(int)
 	// do eval
 	temperature, humidity, retried, err :=
-		dht.ReadDHTxxWithRetry(dht.DHT11, 17, true, 10)
+		dht.ReadDHTxxWithRetry(dht.DHT11, Pin, true, 10)
 	if err != nil {
 		log.Debug(err)
 	}
