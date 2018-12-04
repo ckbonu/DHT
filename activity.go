@@ -5,7 +5,7 @@ import (
 
 	"github.com/TIBCOSoftware/flogo-lib/core/activity"
 	"github.com/TIBCOSoftware/flogo-lib/logger"
-	 dht "github.com/d2r2/go-dht"
+	 "github.com/d2r2/go-dht"
 )
 
 var log = logger.GetLogger("activity-dhtxx")
@@ -35,12 +35,12 @@ func (a *MyActivity) Eval(context activity.Context) (done bool, err error) {
 
 	//sensorType := context.GetInput(ivsensorType).(string)
 
-	PinNumber := context.GetInput(ivPinNumber)
+	//PinNumber := context.GetInput(ivPinNumber)
 	// do eval
 	temperature, humidity, retried, err :=
-		dht.ReadDHTxxWithRetry(dht.DHT11, PinNumber, true, 10)
+		dht.ReadDHTxxWithRetry(dht.DHT11, 17, true, 10)
 	if err != nil {
-		log.Fatal(err)
+		log.Debug(err)
 	}
 	// Print temperature and humidity
 	fmt.Printf("Temperature = %v*C, Humidity = %v%% (retried %d times)\n",
