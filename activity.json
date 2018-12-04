@@ -1,7 +1,8 @@
 {
-  "name": "dhtxx",
+  "name": "isteer-dhtxx",
   "version": "0.0.1",
   "type": "flogo:activity",
+  "title": "dhtxx",
   "description": "activity description",
   "ref": "github.com/ckbonu/DHT",
   "author": "iSteer-ckbonu",
