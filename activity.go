@@ -4,7 +4,7 @@ import (
 
 	"github.com/TIBCOSoftware/flogo-lib/core/activity"
 	"github.com/TIBCOSoftware/flogo-lib/logger"
-	DHT "github.com/d2r2/go-dht"
+	"github.com/d2r2/go-dht"
 )
 
 var log = logger.GetLogger("activity-dhtxx")
@@ -40,7 +40,7 @@ func (a *MyActivity) Eval(context activity.Context) (done bool, err error) {
 
 	// do eval
 	temperature, humidity, retried, err :=
-		DHT.ReadDHTxxWithRetry(DHT.DHT11, Pin, true, 10)
+		dht.ReadDHTxxWithRetry(dht.DHT11, Pin, true, 10)
 	if err != nil {
 		log.Debug(err)
 	}
