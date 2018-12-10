@@ -10,6 +10,9 @@ import (
 )
 
 var activityMetadata *activity.Metadata
+var (
+	PinNumber =""
+)
 
 func getActivityMetadata() *activity.Metadata {
 
