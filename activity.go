@@ -2,15 +2,13 @@ package dhtxx
 
 import (
 	"github.com/TIBCOSoftware/flogo-lib/core/activity"
-	"github.com/TIBCOSoftware/flogo-lib/logger"
-	"github.com/MichaelS11/go-dht"
+	"github.com/d2r2/go-dht"
 )
-
-var log = logger.GetLogger("activity-dhtxx")
 
 const (
 
 	ivPinNumber  = "PinNumber"
+	//ivSensorType = "SensorType"
 	ovResult = "output"
 )
 
@@ -32,27 +30,24 @@ func (a *MyActivity) Metadata() *activity.Metadata {
 // Eval implements activity.Activity.Eval
 func (a *MyActivity) Eval(context activity.Context) (done bool, err error) {
 
-	//sensorType := context.GetInput(ivsensorType).(string)
+	PinNumber := context.GetInput(ivPinNumber).(int)
+	SensorType := dht.DHT11
 
-	PinNumber := context.GetInput(ivPinNumber).(string)
-	//output := context.GetInput(ivoutput).(string)
 
-	dht, err := dht.NewDHT(PinNumber, dht.Fahrenheit, "")
+
+	//sensorType := dht.DHT11
+
+	temperature, humidity, retried, err :=
+    	dht.ReadDHTxxWithRetry(SensorType, PinNumber, false, 10)
+
 	if err != nil {
-		context.SetOutput(ovResult, err)
+		context.SetOutput(ovResult, err.Error())
 		return false, err
 	}
 
-	humidity, temperature, err := dht.Read()
-	if err != nil {
-		context.SetOutput(ovResult, err)
-		return false, err
-	}
-	// do eval
-
-	// Print temperature and humidity
     context.SetOutput(ovResult, temperature)
 	context.SetOutput(ovResult, humidity)
+    context.SetOutput(ovResult, retried)
 
 	return true, nil
 }

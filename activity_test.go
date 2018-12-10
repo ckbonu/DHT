@@ -5,8 +5,8 @@ import (
 	"io/ioutil"
 	"testing"
 
-	"github.com/TIBCOSoftware/flogo-lib/core/activity"
 	"github.com/TIBCOSoftware/flogo-contrib/action/flow/test"
+	"github.com/TIBCOSoftware/flogo-lib/core/activity"
 )
 
 var activityMetadata *activity.Metadata
@@ -53,7 +53,7 @@ func TestEval(t *testing.T) {
 
 	//setup attrs
 	tc.SetInput("PinNumber", PinNumber)
-	act.Eval(tc)
+	_ ,_ = act.Eval(tc)
 
 	output := tc.GetOutput("output")
 	fmt.Printf("[%s]", output)
