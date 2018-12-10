@@ -34,10 +34,10 @@ func (a *MyActivity) Eval(context activity.Context) (done bool, err error) {
 
 	//sensorType := context.GetInput(ivsensorType).(string)
 
-	//Pin := context.GetInput(ivPinNumber).(int)
+	PinNumber := context.GetInput(ivPinNumber).(string)
 	//output := context.GetInput(ivoutput).(string)
 
-	dht, err := dht.NewDHT("GPIO17", dht.Fahrenheit, "")
+	dht, err := dht.NewDHT(PinNumber, dht.Fahrenheit, "")
 	if err != nil {
 		context.SetOutput(ovResult, err)
 		return false, err

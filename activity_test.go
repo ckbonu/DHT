@@ -1,6 +1,7 @@
 package dhtxx
 
 import (
+	"fmt"
 	"io/ioutil"
 	"testing"
 
@@ -48,8 +49,10 @@ func TestEval(t *testing.T) {
 	tc := test.NewTestActivityContext(getActivityMetadata())
 
 	//setup attrs
-
+	tc.SetInput("PinNumber", PinNumber)
 	act.Eval(tc)
 
+	output := tc.GetOutput("output")
+	fmt.Printf("[%s]", output)
 	//check result attr
 }
