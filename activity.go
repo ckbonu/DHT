@@ -2,15 +2,19 @@ package dhtxx
 
 import (
 	"github.com/TIBCOSoftware/flogo-lib/core/activity"
+	"github.com/TIBCOSoftware/flogo-lib/logger"
 	"github.com/d2r2/go-dht"
+
 )
 
 const (
 
 	ivPinNumber  = "PinNumber"
 	//ivSensorType = "SensorType"
-	ovResult = "output"
+	ovResult = "output"																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																	
 )
+
+var log = logger.GetLogger("activity-dhtxx")
 
 // MyActivity is a stub for your Activity implementation
 type MyActivity struct {
@@ -41,13 +45,20 @@ func (a *MyActivity) Eval(context activity.Context) (done bool, err error) {
     	dht.ReadDHTxxWithRetry(SensorType, PinNumber, false, 10)
 
 	if err != nil {
-		context.SetOutput(ovResult, err.Error())
+		log.Error(err)
+
+		//context.SetOutput(ovResult, err.Error())
 		return false, err
 	}
+
+
+	log.Debug(err)
 
     context.SetOutput(ovResult, temperature)
 	context.SetOutput(ovResult, humidity)
     context.SetOutput(ovResult, retried)
+
+
 
 	return true, nil
 }
